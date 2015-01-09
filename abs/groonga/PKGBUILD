@@ -29,5 +29,6 @@ build() {
 package() {
     cd $srcdir/$pkgname-$pkgver
     make DESTDIR="$pkgdir" install
+    makedir -p /var/lib/groonga/db/
 }
 md5sums=('93c763da6c298595da4b6964d6b80769')

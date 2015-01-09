@@ -1,0 +1,19 @@
+[Unit]
+Description=Groonga server daemon
+Wants=network-online.target
+After=syslog.target network-online.target
+
+[Service]
+ExecStart=/usr/bin/groonga -d --pid-path=${PIDFILE:-/var/run/groonga/groonga.pid} --config-path=${CONFIG_FILE:-/etc/groonga/groonga.conf} $DATABASE
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill $MAINPID
+User=groonga
+Group=groonga
+
+Restart=always
+TimeoutStopSec=320s
+KillMode=process
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
